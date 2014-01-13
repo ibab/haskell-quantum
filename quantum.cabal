@@ -14,7 +14,7 @@ description:         Implementation of the 'Quantum' Monad, which promotes an ar
                      This allows (in theory) the simulation of any discrete quantum process.
                      .
                      The @Quantum@ Monad is analogous to the @Probability@ Monad used for probabalistic programming.
-                     The main difference is in the normation of states: While using the L1 norm leads to probabalistic states,
+                     The main difference is in the normalization of states: While using the L1 norm leads to probabalistic states,
                      the L2 norm is responsible for quantum states.
                      .
                      Analogously, one can say that this package implements the concept of /quantum programming/.
