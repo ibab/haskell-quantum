@@ -10,6 +10,7 @@ module Control.Quantum
     , MonadQuantum
     , runQuantum
     , runQuantum'
+    , measure
     , measurements
     )
     where
@@ -19,6 +20,7 @@ import           Data.Map (Map)
 import           Data.Monoid
 import           Control.Monad
 import           Control.Applicative
+import           Control.Monad.Random as R
 import           Data.Complex
 
 nearZero :: Double -> Bool
@@ -140,10 +142,20 @@ runQuantum = collapse . toList
 runQuantum' :: Quantum a -> WaveFunction a
 runQuantum' = collapse . toList'
 
+-- | Measures a quantum state. Returns a single realization of the underlying data type
+-- with probability equal to the squared magnitude of the amplitude of that realization.
+-- Note that if this Module would be backed by a real quantum processor, this would be
+-- the only valid way to extract information from the Monad.
+measure :: (Ord a) => Quantum a -> IO a
+measure q = do
+  x <- evalRandIO $ R.fromList $ map (\(a, b) -> (a, toRational b)) $ measurements q
+  return x
+
 -- | Converts a quantum state into a probability state through measurement.
--- Equivalent to measuring the quantum state many times and noting the
--- frequency of each state.
+-- Equivalent to performing repeated measurements on equally prepared quantum states
+-- and noting the frequency of each possible realization.
 measurements :: (Ord a) => Quantum a -> [(a, Double)]
 measurements = f . runQuantum
     where f xs = [(x, (magnitude q)**2) | (x, q) <- xs]
+
 
