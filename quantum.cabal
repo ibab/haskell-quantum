@@ -1,0 +1,43 @@
+
+name:                quantum
+-- PVP summary:      +-+------- breaking API changes
+--                   | | +----- non-breaking API additions
+--                   | | | +--- code changes with no API change
+version:             0.0.0.0
+synopsis:            A Monad for simulating quantum processes.
+description:         Implementation of the 'Quantum' Monad, which promotes an arbitrary data type to a quantum state.
+                     .
+                     Whenever a value of type @Quantum a@ is modified, the modification is propagated to all
+                     possible states of the underlying type.
+                     Each possible state is weighted by a complex amplitude and the individual amplitudes can interfere
+                     when the state undergoes a transformation.
+                     This allows (in theory) the simulation of any discrete quantum process.
+                     .
+                     The @Quantum@ Monad is analogous to the @Probability@ Monad used for probabalistic programming.
+                     The main difference is in the normation of states: While using L1 norm leads to probabalistic states,
+                     the L2 norm is responsible for quantum states.
+                     .
+                     Analogously, one can say that this package implements the concept of /quantum programming/.
+
+license:             BSD3
+license-file:        LICENSE
+author:              Igor Babuschkin
+maintainer:          igor@babuschk.in
+copyright:           2014 Igor Babuschkin
+category:            Math
+build-type:          Simple
+-- extra-source-files:  
+cabal-version:       >=1.10
+
+Source-Repository head
+    Type: git
+    Location: https://github.com/ibab/haskell-quantum
+
+library
+  exposed-modules:     Control.Quantum
+  -- other-modules:       
+  -- other-extensions:    
+  build-depends:       base >=4.6 && <4.7, containers
+  hs-source-dirs:      src
+  default-language:    Haskell2010
+  
