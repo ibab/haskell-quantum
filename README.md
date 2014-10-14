@@ -37,5 +37,6 @@ transform qx qy = do
 
 main = do
     print $ measurements $ transform state state
+-- [((0,0),0.25),((0,1),0.25),((1,1),0.25),((1,2),0.25)]
 ```
 

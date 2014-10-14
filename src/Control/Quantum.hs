@@ -6,7 +6,8 @@
 module Control.Quantum
     ( Amplitude
     , WaveFunction
-    , Quantum(..)
+    , Quantum
+    , quantize
     , MonadQuantum
     , runQuantum
     , runQuantum'
